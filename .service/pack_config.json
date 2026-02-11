@@ -1,0 +1,7 @@
+{
+  "workdir": "service",
+  "include": [
+    "app.py",
+    "generate_commitment.py"
+  ]
+}
