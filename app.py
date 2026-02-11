@@ -10,11 +10,10 @@ import time
 import threading
 import logging
 import hashlib
-from time import sleep
 
 from node_controller.controller.controller import Controller
 from node_controller.gateway.utils import from_gas_amount, to_gas_amount
-from node_controller.gateway.protos import gateway_pb2, gateway_pb2_grpc, celaut_pb2
+from node_controller.gateway.protos import celaut_pb2, celaut_pb2_grpc
 
 from generate_commitment import generate_gop_commitment
 
@@ -31,7 +30,7 @@ app = Flask(__name__)
 
 SECRET_S_HEX = "00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff"
 
-APP_DIR = "/service"
+APP_DIR = "."
 FREQUENCY = 1
 TIME_FOR_SOLVER_START = 90
 
@@ -56,7 +55,8 @@ stop_game_event = threading.Event()
 
 controller = Controller(
     debug=lambda s: logger.info('Node Controller: %s', s),
-    app_dir=APP_DIR
+    app_dir=APP_DIR,
+    config_file="./__config__"   # To be used locally with "nodo ggconf ." command
 )
 solver_url = ""
 
@@ -410,15 +410,7 @@ def start_live_game():
         solver_file.save(file_path)
         logger.info(f"Solver file '{solver_file.filename}' saved as solver.celaut.bee.")
 
-        solver_config = gateway_pb2.Configuration(
-                config=celaut_pb2.Configuration(),
-                resources=gateway_pb2.CombinationResources(clause={
-                    1: gateway_pb2.CombinationResources.Clause(
-                        min_sysreq=celaut_pb2.Sysresources(
-                            mem_limit=10**8
-                        )
-                    )
-                }),
+        solver_config = celaut_pb2.Configuration(
                 initial_gas_amount=to_gas_amount(10**10)
             )
         logger.info("Created solver configuration object.")
@@ -1185,7 +1177,7 @@ HTML_CONTENT = """
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            participationErrorText.textContent = "Data downloaded. ¡Remember to store the logs and <solver>.cealut.bee files!"; 
+            participationErrorText.textContent = "Data downloaded. ¡Remember to store the logs and <solver>.celaut.bee files!"; 
         });
 
         function setStatusMessage(message, type = 'info') {
