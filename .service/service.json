@@ -1,7 +1,20 @@
 {
     "tag": "snake-game",
-    "api": [{"port":5000, "protocol":["http"]}],
-    "architecture": "aarch64",
+    "api": [
+        {
+            "port": 5000,
+            "protocol": [
+                "http"
+            ]
+        }
+    ],
+    "resources": {
+        "at_init": {
+            "mem_limit": 1500000000,
+            "disk_space": 5000000000
+        }
+    },
+    "architecture": "linux/amd64",
     "entrypoint": "/service/app.py",
     "envs": [],
     "network": []
