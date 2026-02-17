@@ -1,0 +1,13 @@
+{
+    "tag": "basic-ai-snake",
+    "api": [{"port":5001, "protocol":["http"]}],
+    "architecture": "linux/amd64",
+    "entrypoint": "/service/app.py",
+    "envs": [],
+    "network": [],
+    "resources": {
+        "at_init": {
+            "mem_limit": 50000000
+        }
+    }
+}
