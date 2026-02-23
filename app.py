@@ -1803,4 +1803,4 @@ HTML_CONTENT = """
 
 if __name__ == '__main__':
     logger.info(f"Snake Game Server (Live View) started at http://localhost:5000 or http://<host_ip>:5000")
-    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)
+    app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False)
