@@ -15,7 +15,7 @@
         }
     },
     "architecture": "linux/amd64",
-    "entrypoint": "/service/app.py",
+    "entrypoint": "/service/game.py",
     "envs": [],
     "network": []
 }
